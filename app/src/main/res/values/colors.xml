@@ -13,4 +13,5 @@
     <color name="background_gray">#242A33</color>
     <color name="shimmer_background">#dddddd</color>
     <color name="rating_background">#80000000</color>
+    <color name="yellow_rating">#FFD034</color>
 </resources>
