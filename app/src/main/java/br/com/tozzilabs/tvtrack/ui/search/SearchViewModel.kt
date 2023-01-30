@@ -1,4 +1,4 @@
-package br.com.tozzilabs.tvtrack.ui.dashboard
+package br.com.tozzilabs.tvtrack.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

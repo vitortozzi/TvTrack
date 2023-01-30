@@ -1,4 +1,4 @@
-package br.com.tozzilabs.tvtrack.ui.dashboard
+package br.com.tozzilabs.tvtrack.ui.search
 
 import android.os.Bundle
 import android.view.*
