@@ -3,7 +3,7 @@ package br.com.tozzilabs.tvtrack.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.tozzilabs.tvtrack.data.di.MovieRepository
+import br.com.tozzilabs.tvtrack.data.MovieRepository
 import br.com.tozzilabs.tvtrack.data.model.ApiError
 import br.com.tozzilabs.tvtrack.data.model.ApiException
 import br.com.tozzilabs.tvtrack.data.model.ApiSuccess
@@ -21,16 +21,18 @@ class HomeViewModel @Inject constructor(
 
     init {
         loadTrends()
-        loadComingSoon()
+        loadTopRated()
     }
 
-    private fun loadComingSoon() {
+    private fun loadTopRated() {
         viewModelScope.launch {
             viewState.value = HomeViewState.Loading
-            viewState.value = when (val response = repository.getUpcomingMovies()) {
-                is ApiSuccess -> HomeViewState.UpcomingLoaded(response.data.results)
-                is ApiException -> HomeViewState.Error
-                is ApiError -> HomeViewState.Error
+            repository.getTopRatedMovies().collect {
+                viewState.value = when (it) {
+                    is ApiSuccess -> HomeViewState.TopRatedLoaded(it.data.results)
+                    is ApiException -> HomeViewState.Error
+                    is ApiError -> HomeViewState.Error
+                }
             }
         }
     }
@@ -38,10 +40,12 @@ class HomeViewModel @Inject constructor(
     private fun loadTrends() {
         viewModelScope.launch {
             viewState.value = HomeViewState.Loading
-            viewState.value = when (val response = repository.getTrendMovies()) {
-                is ApiSuccess -> HomeViewState.TrendLoaded(response.data.results)
+            repository.getTrendMovies().collect{
+                viewState.value = when(it) {
+                is ApiSuccess -> HomeViewState.TrendLoaded(it.data.results)
                 is ApiException -> HomeViewState.Error
                 is ApiError -> HomeViewState.Error
+                }
             }
         }
     }
@@ -49,7 +53,7 @@ class HomeViewModel @Inject constructor(
 
 sealed class HomeViewState {
     data class TrendLoaded(val movies: List<Movie>): HomeViewState()
-    data class UpcomingLoaded(val movies: List<Movie>): HomeViewState()
+    data class TopRatedLoaded(val movies: List<Movie>): HomeViewState()
     object Loading: HomeViewState()
     object Error: HomeViewState()
 }

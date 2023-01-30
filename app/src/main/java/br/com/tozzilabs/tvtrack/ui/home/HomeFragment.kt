@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.tozzilabs.tvtrack.databinding.FragmentHomeBinding
 import br.com.tozzilabs.tvtrack.model.Movie
 import br.com.tozzilabs.tvtrack.ui.detail.MovieDetailActivityDirections
+import br.com.tozzilabs.tvtrack.ui.home.adapter.DiscoverMovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,12 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel>()
+
+    private val trendingAdapter = setupAdapter()
+    private val topRatedAdapter = setupAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +37,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclers()
         setupObservers()
+    }
+
+    private fun setupRecyclers() {
+        binding.homeContent.recycler.adapter = trendingAdapter
+        binding.homeContent.recyclerTopRated.adapter = topRatedAdapter
     }
 
     private fun setupObservers() {
@@ -49,13 +56,11 @@ class HomeFragment : Fragment() {
             HomeViewState.Loading -> showLoading()
             is HomeViewState.TrendLoaded -> {
                 showContent()
-                val trendMovieAdapter = setupAdapter(homeViewState.movies)
-                binding.homeContent.recycler.adapter = trendMovieAdapter
+                trendingAdapter.movies = homeViewState.movies
             }
-            is HomeViewState.UpcomingLoaded -> {
+            is HomeViewState.TopRatedLoaded -> {
                 showContent()
-                val trendMovieAdapter = setupAdapter(homeViewState.movies)
-                binding.homeContent.recyclerComingSoon.adapter = trendMovieAdapter
+                topRatedAdapter.movies = homeViewState.movies
             }
             null -> {}
         }
@@ -73,11 +78,15 @@ class HomeFragment : Fragment() {
         binding.homeContent.root.visibility = View.VISIBLE
     }
 
-    private fun setupAdapter(movies: List<Movie>): TrendMovieAdapter =
-        TrendMovieAdapter(movies).apply {
+    private fun redirectToDetails(it: Movie) {
+        val action = MovieDetailActivityDirections.startMovieDetails(it)
+        findNavController().navigate(action)
+    }
+
+    private fun setupAdapter() =
+        DiscoverMovieAdapter().apply {
             listener = {
-                val action = MovieDetailActivityDirections.startMovieDetails(it)
-                findNavController().navigate(action)
+                redirectToDetails(it)
             }
         }
 

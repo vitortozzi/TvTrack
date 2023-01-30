@@ -5,4 +5,18 @@
     <dimen name="app_bar_height">240dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="spacing_inset_lg">24dp</dimen>
+    <dimen name="spacing_inset_md">16dp</dimen>
+    <dimen name="spacing_inset_sm">8dp</dimen>
+    <dimen name="poster_detail_width">120dp</dimen>
+    <dimen name="poster_detail_height">160dp</dimen>
+    <dimen name="spcing_inset_xs">4dp</dimen>
+    <dimen name="imdb_logo_width">32dp</dimen>
+    <dimen name="imdb_logo_height">32dp</dimen>
+    <dimen name="icon_width_lg">32dp</dimen>
+    <dimen name="icon_height_lg">32dp</dimen>
+    <dimen name="poster_discover_width">120dp</dimen>
+    <dimen name="poster_discover_height">180dp</dimen>
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="spacing_inset_xxs">2dp</dimen>
 </resources>

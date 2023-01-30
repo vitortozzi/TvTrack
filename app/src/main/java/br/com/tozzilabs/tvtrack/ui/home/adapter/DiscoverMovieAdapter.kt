@@ -1,19 +1,25 @@
-package br.com.tozzilabs.tvtrack.ui.home
+package br.com.tozzilabs.tvtrack.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.tozzilabs.tvtrack.databinding.LayoutMovieTrendItemBinding
+import br.com.tozzilabs.tvtrack.databinding.LayoutMovieDiscoverItemBinding
 import br.com.tozzilabs.tvtrack.model.Movie
 import br.com.tozzilabs.tvtrack.model.getFormattedRating
 import br.com.tozzilabs.tvtrack.model.getImageUrl
 import com.bumptech.glide.Glide
 
 
-class TrendMovieAdapter(
-    private val movies: List<Movie>,
-) : RecyclerView.Adapter<TrendMovieAdapter.TrendMovieHolder>() {
+class DiscoverMovieAdapter : RecyclerView.Adapter<DiscoverMovieAdapter.DiscoverMovieViewHolder>() {
+
+    var movies: List<Movie> = listOf()
+    @SuppressLint("NotifyDataSetChanged")
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     companion object {
         private const val UNVOTED_VALUE = 0.0
@@ -21,7 +27,7 @@ class TrendMovieAdapter(
 
     var listener: ((Movie) -> Unit)? = null
 
-    inner class TrendMovieHolder(private val binding: LayoutMovieTrendItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class DiscoverMovieViewHolder(private val binding: LayoutMovieDiscoverItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
 
             binding.movieTitle.text = movie.title
@@ -41,14 +47,14 @@ class TrendMovieAdapter(
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendMovieHolder {
-        val itemBinding = LayoutMovieTrendItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TrendMovieHolder(itemBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiscoverMovieViewHolder {
+        val itemBinding = LayoutMovieDiscoverItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DiscoverMovieViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int = movies.size
 
-    override fun onBindViewHolder(holder: TrendMovieHolder, position: Int) {
+    override fun onBindViewHolder(holder: DiscoverMovieViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
     }

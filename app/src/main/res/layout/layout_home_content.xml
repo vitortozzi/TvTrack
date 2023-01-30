@@ -17,19 +17,19 @@
         android:text="@string/home_trend_section_title"/>
 
     <ImageView
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/spacing_inset_sm"
         app:layout_constraintStart_toEndOf="@id/trend_section_title"
         app:layout_constraintTop_toTopOf="@id/trend_section_title"
         app:layout_constraintBottom_toBottomOf="@id/trend_section_title"
-        android:layout_width="32dp"
+        android:layout_width="@dimen/icon_width_lg"
         android:src="@drawable/ic_trending_up"
-        android:layout_height="32dp"/>
+        android:layout_height="@dimen/icon_height_lg"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_inset_md"
         android:orientation="horizontal"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/spacing_inset_md"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/trend_section_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,18 +41,18 @@
         android:id="@+id/coming_soon_section_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/spacing_inset_lg"
         android:textSize="18sp"
         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
         app:layout_constraintTop_toBottomOf="@id/recycler"
         app:layout_constraintStart_toStartOf="@id/trend_section_title"
-        android:text="@string/home_coming_soon_section_title"/>
+        android:text="@string/home_top_rated_section_title"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerComingSoon"
-        android:layout_marginTop="16dp"
+        android:id="@+id/recyclerTopRated"
+        android:layout_marginTop="@dimen/spacing_inset_md"
         android:orientation="horizontal"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/spacing_inset_md"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/coming_soon_section_title"
         app:layout_constraintStart_toStartOf="parent"

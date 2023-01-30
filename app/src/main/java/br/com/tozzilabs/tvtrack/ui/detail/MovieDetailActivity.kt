@@ -76,10 +76,6 @@ class MovieDetailActivity : AppCompatActivity() {
             }
         }
     }
-
-//    override fun onBackPressed() {
-//        this.finish()
-//    }
 }
 
 sealed class DetailViewState {

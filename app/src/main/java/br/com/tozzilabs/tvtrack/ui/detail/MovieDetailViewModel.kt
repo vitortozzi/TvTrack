@@ -3,7 +3,7 @@ package br.com.tozzilabs.tvtrack.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.tozzilabs.tvtrack.data.di.MovieRepository
+import br.com.tozzilabs.tvtrack.data.MovieRepository
 import br.com.tozzilabs.tvtrack.data.model.ApiError
 import br.com.tozzilabs.tvtrack.data.model.ApiException
 import br.com.tozzilabs.tvtrack.data.model.ApiSuccess
@@ -21,11 +21,12 @@ class MovieDetailViewModel @Inject constructor(
     fun fetchDetails(id: Long) {
         viewModelScope.launch {
             detailLiveData.value = DetailViewState.Loading
-            val details = repository.getDetails(id)
-            detailLiveData.value = when (details) {
-                is ApiError -> DetailViewState.Error
-                is ApiException -> DetailViewState.Error
-                is ApiSuccess -> DetailViewState.DetailLoaded(details.data)
+            repository.getDetails(id).collect {
+                detailLiveData.value = when (it) {
+                    is ApiError -> DetailViewState.Error
+                    is ApiException -> DetailViewState.Error
+                    is ApiSuccess -> DetailViewState.DetailLoaded(it.data)
+                }
             }
         }
     }

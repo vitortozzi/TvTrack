@@ -1,6 +1,9 @@
 package br.com.tozzilabs.tvtrack.data.di
 
 import br.com.tozzilabs.tvtrack.data.AuthInterceptor
+import br.com.tozzilabs.tvtrack.data.MovieApiService
+import br.com.tozzilabs.tvtrack.data.MovieRepository
+import br.com.tozzilabs.tvtrack.data.MovieRepositoryImplToTest
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,7 +50,7 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideRepository(apiService: MovieApiService): MovieRepository = MovieRepositoryImpl(apiService)
+    fun provideRepository(apiService: MovieApiService): MovieRepository = MovieRepositoryImplToTest(apiService)
 
 }
 

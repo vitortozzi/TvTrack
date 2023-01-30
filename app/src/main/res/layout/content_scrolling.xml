@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="24dp"
+    android:layout_marginTop="@dimen/spacing_inset_lg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.detail.MovieDetailActivity"
     tools:showIn="@layout/activity_movie_detail">
@@ -17,15 +17,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_inset_md"
             app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|start">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_poster"
-                android:layout_width="120dp"
-                android:layout_height="160dp"
-                app:cardCornerRadius="8dp"
+                android:layout_width="@dimen/poster_detail_width"
+                android:layout_height="@dimen/poster_detail_height"
+                app:cardCornerRadius="@dimen/spacing_inset_sm"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -46,8 +46,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/spacing_inset_md"
+                android:layout_marginEnd="@dimen/spacing_inset_md"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/card_poster"
@@ -67,7 +67,7 @@
                     tools:text="SpiderMan 2" />
 
                 <LinearLayout
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_inset_sm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -75,14 +75,14 @@
                     <ImageView
                         android:contentDescription="@string/rating_content_description"
                         app:tint="@color/yellow_rating"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/spacing_inset_lg"
+                        android:layout_height="@dimen/spacing_inset_lg"
                         android:src="@drawable/ic_star"/>
 
                     <TextView
                         android:id="@+id/movie_rating"
                         android:textColor="@color/yellow_rating"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="@dimen/spcing_inset_xs"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
@@ -91,20 +91,20 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/spcing_inset_xs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:contentDescription="@string/calendar_icon_movie_release_date_content_description"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/spacing_inset_lg"
+                        android:layout_height="@dimen/spacing_inset_lg"
                         android:src="@drawable/ic_calendar"/>
 
                     <TextView
                         android:id="@+id/movie_release"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="@dimen/spcing_inset_xs"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -112,20 +112,20 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/spcing_inset_xs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:contentDescription="@string/clock_movie_runtime_description"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/spacing_inset_lg"
+                        android:layout_height="@dimen/spacing_inset_lg"
                         android:src="@drawable/ic_schedule"/>
 
                     <TextView
                         android:id="@+id/movie_lenght"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="@dimen/spcing_inset_xs"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
 
                 <TextView
                     android:id="@+id/movie_genders"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/spcing_inset_xs"
                     android:textSize="14sp"
                     tools:text="Action"
                     android:layout_width="wrap_content"
@@ -156,8 +156,8 @@
                 android:src="@drawable/ic_imdb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="32dp"
-                android:layout_height="32dp"/>
+                android:layout_width="@dimen/imdb_logo_width"
+                android:layout_height="@dimen/imdb_logo_height"/>
 
             <TextView
                 android:id="@+id/movie_tagline"
@@ -173,7 +173,7 @@
 
             <TextView
                 android:contentDescription="@string/imdb_logo_description"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_inset_md"
                 app:layout_constraintTop_toBottomOf="@id/movie_tagline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -185,10 +185,5 @@
                 tools:text="@string/large_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
-
-
-
 </androidx.core.widget.NestedScrollView>
