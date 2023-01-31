@@ -6,8 +6,14 @@ TvTrack is a sample application where you can browse movies. The main goal of th
 demonstrate some of the Android Architecture Components.
 
 ## How the app was builded
-The project is coded in Kotlin, using MVVM as its architecture using
-Retrofit, Coroutines, Hilt and Flow
+- **Kotlin** as its language
+- **MVVM** as its archiitecture
+- **Livedata** for UI updates
+- **Glide** for remote image processing
+- **Shimmer** for loadings
+- **Flow** and **Coroutines** for async tasks
+- **Retrofit** for HTTP requests
+- **Hilt** for dependency injection
 
 ## Remote DataSource
 The Movie DataBase is a free API where you can browse a lot of information about movies and series.
@@ -18,51 +24,10 @@ The only requirement is that you you need to register in order to get an API key
 ![My First Board](https://user-images.githubusercontent.com/4106155/215655956-ea1ec4ba-767e-4ec6-b966-f6aa08d22bba.jpg)
 
 ## Screenshots
-![Screenshot_20230130_190451](https://user-images.githubusercontent.com/4106155/215656043-8e0f5ff7-8bb3-41e6-8828-575a4e5caa04.png)
+<img width="355" alt="image" src="https://user-images.githubusercontent.com/4106155/215658485-ce317a59-2a5d-4e19-8842-ca8eaabccdf6.png"> <img width="356" alt="image" src="https://user-images.githubusercontent.com/4106155/215658595-397ad2ef-0bae-4806-a18b-a7ec55ffdf93.png">
+
+## DarkMode
+
+<img width="356" alt="image" src="https://user-images.githubusercontent.com/4106155/215658707-528670ea-e9b3-4c47-a302-615799001bf1.png"> <img width="365" alt="image" src="https://user-images.githubusercontent.com/4106155/215658733-63073ecd-268c-4caa-af18-420f03c2cfe6.png">
 
 
-
-##
-
-Instructions for how to get a copy of the project running on your local machine.
-
-### Dependencies
-
-```
-Examples here
-```
-
-### Installation
-
-Step by step explanation of how to get a dev environment running.
-
-List out the steps
-
-```
-Give an example here
-```
-
-## Testing
-
-Explain the steps needed to run any automated tests
-
-### Break Down Tests
-
-Explain what each test does and why
-
-```
-Examples here
-```
-## Project Instructions
-
-This section should contain all the student deliverables for this project.
-
-## Built With
-
-* [Item1](www.item1.com) - Description of item
-* [Item2](www.item2.com) - Description of item
-* [Item3](www.item3.com) - Description of item
-
-Include all items used to build project.
-
-## License`
