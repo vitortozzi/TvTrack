@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.com.tozzilabs.tvtrack.databinding.LayoutMovieDiscoverItemBinding
-import br.com.tozzilabs.tvtrack.model.Movie
-import br.com.tozzilabs.tvtrack.model.getFormattedRating
-import br.com.tozzilabs.tvtrack.model.getImageUrl
-import br.com.tozzilabs.tvtrack.ui.detail.MovieDetailActivityDirections
+import br.com.tozzilabs.tvtrack.data.model.Movie
+import br.com.tozzilabs.tvtrack.data.model.getFormattedRating
+import br.com.tozzilabs.tvtrack.data.model.getImageUrl
 import com.bumptech.glide.Glide
 
 

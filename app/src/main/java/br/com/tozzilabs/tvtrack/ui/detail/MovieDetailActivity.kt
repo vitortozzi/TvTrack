@@ -5,14 +5,16 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navArgs
 import br.com.tozzilabs.tvtrack.R
-import br.com.tozzilabs.tvtrack.data.model.IMDB_PATH
+import br.com.tozzilabs.tvtrack.data.model.*
 import br.com.tozzilabs.tvtrack.databinding.ActivityMovieDetailBinding
-import br.com.tozzilabs.tvtrack.model.*
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -37,7 +39,11 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        viewModel.detailLiveData.observe(this, Observer(::handleMovieDetails))
+        lifecycleScope.launch {
+            viewModel.uiState.collectLatest { uiState ->
+                handleMovieDetails(uiState)
+            }
+        }
     }
 
     private fun handleMovieDetails(detailViewState: DetailViewState?) {

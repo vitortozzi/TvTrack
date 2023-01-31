@@ -1,4 +1,4 @@
-package br.com.tozzilabs.tvtrack.model
+package br.com.tozzilabs.tvtrack.data.model
 
 data class DiscoveryResponse (
     val page: Int,

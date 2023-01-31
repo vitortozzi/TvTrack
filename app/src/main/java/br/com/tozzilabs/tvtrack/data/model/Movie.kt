@@ -1,6 +1,5 @@
-package br.com.tozzilabs.tvtrack.model
+package br.com.tozzilabs.tvtrack.data.model
 
-import br.com.tozzilabs.tvtrack.data.model.IMAGES_PATH
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.time.LocalDate

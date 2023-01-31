@@ -1,32 +1,29 @@
 package br.com.tozzilabs.tvtrack.ui.detail
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.tozzilabs.tvtrack.data.MovieRepository
-import br.com.tozzilabs.tvtrack.data.model.ApiError
-import br.com.tozzilabs.tvtrack.data.model.ApiException
-import br.com.tozzilabs.tvtrack.data.model.ApiSuccess
+import br.com.tozzilabs.tvtrack.data.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
     private val repository: MovieRepository
-): ViewModel() {
+) : ViewModel() {
 
-    val detailLiveData = MutableLiveData<DetailViewState>()
+    private val _uiState = MutableStateFlow<DetailViewState>(DetailViewState.Loading)
+    val uiState: StateFlow<DetailViewState> = _uiState
 
     fun fetchDetails(id: Long) {
         viewModelScope.launch {
-            detailLiveData.value = DetailViewState.Loading
-            repository.getDetails(id).collect {
-                detailLiveData.value = when (it) {
-                    is ApiError -> DetailViewState.Error
-                    is ApiException -> DetailViewState.Error
-                    is ApiSuccess -> DetailViewState.DetailLoaded(it.data)
-                }
+            val response = repository.getDetails(id)
+            _uiState.value = when (response) {
+                is Resource.Error -> DetailViewState.Error
+                is Resource.Success -> DetailViewState.DetailLoaded(response.getContent())
             }
         }
     }

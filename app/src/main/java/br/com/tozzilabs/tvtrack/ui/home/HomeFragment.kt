@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.tozzilabs.tvtrack.databinding.FragmentHomeBinding
-import br.com.tozzilabs.tvtrack.model.Movie
+import br.com.tozzilabs.tvtrack.data.model.Movie
 import br.com.tozzilabs.tvtrack.ui.detail.MovieDetailActivityDirections
 import br.com.tozzilabs.tvtrack.ui.home.adapter.DiscoverMovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -47,23 +48,22 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        homeViewModel.trendLiveDate.observe(viewLifecycleOwner, Observer(::handleState))
-        homeViewModel.topRatedLiveData.observe(viewLifecycleOwner, Observer(::handleState))
+        lifecycleScope.launch {
+            homeViewModel.uiState.collect { uiState ->
+                handleState(uiState)
+            }
+        }
     }
 
-    private fun handleState(homeViewState: HomeViewState?) {
+    private fun handleState(homeViewState: HomeViewState) {
         when(homeViewState) {
             HomeViewState.Error -> showError("Error while fetching movies...")
             HomeViewState.Loading -> showLoading()
-            is HomeViewState.TrendLoaded -> {
+            is HomeViewState.DiscoverItemsLoaded -> {
                 showContent()
-                trendingAdapter.movies = homeViewState.movies
+                trendingAdapter.movies = homeViewState.discover.trend
+                topRatedAdapter.movies = homeViewState.discover.topRated
             }
-            is HomeViewState.TopRatedLoaded -> {
-                showContent()
-                topRatedAdapter.movies = homeViewState.movies
-            }
-            null -> {}
         }
     }
 

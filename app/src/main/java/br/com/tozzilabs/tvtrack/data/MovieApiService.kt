@@ -1,7 +1,7 @@
 package br.com.tozzilabs.tvtrack.data
 
-import br.com.tozzilabs.tvtrack.model.DiscoveryResponse
-import br.com.tozzilabs.tvtrack.model.Movie
+import br.com.tozzilabs.tvtrack.data.model.DiscoveryResponse
+import br.com.tozzilabs.tvtrack.data.model.Movie
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -33,14 +33,14 @@
         android:label="@string/movieDetailActivityTitle">
     <argument
         android:name="movieArg"
-        app:argType="br.com.tozzilabs.tvtrack.model.Movie" />
+        app:argType="br.com.tozzilabs.tvtrack.data.model.Movie" />
     </activity>
 
     <action android:id="@+id/startMovieDetails"
         app:destination="@+id/detailActivity">
         <argument
             android:name="movieArg"
-            app:argType="br.com.tozzilabs.tvtrack.model.Movie"
+            app:argType="br.com.tozzilabs.tvtrack.data.model.Movie"
             app:nullable="true"
             android:defaultValue="@null" />
     </action>
