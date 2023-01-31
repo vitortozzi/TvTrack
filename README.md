@@ -5,7 +5,7 @@
 TvTrack is a sample application where you can browse movies. The main goal of this project is to apply and 
 demonstrate some of the Android Architecture Components.
 
-## How the app was builded
+## How the app was built
 - **Kotlin** as its language
 - **MVVM** as its archiitecture
 - **Livedata** for UI updates
