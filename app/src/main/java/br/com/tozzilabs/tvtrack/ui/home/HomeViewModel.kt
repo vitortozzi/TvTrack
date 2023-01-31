@@ -17,35 +17,36 @@ class HomeViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    val viewState = MutableLiveData<HomeViewState>()
+    val trendLiveDate = MutableLiveData<HomeViewState>()
+    val topRatedLiveData = MutableLiveData<HomeViewState>()
 
     init {
-        loadTrends()
-        loadTopRated()
+        loadDiscoverMovies()
     }
 
-    private fun loadTopRated() {
+    private fun loadDiscoverMovies() {
         viewModelScope.launch {
-            viewState.value = HomeViewState.Loading
+
+            trendLiveDate.value = HomeViewState.Loading
+
             repository.getTopRatedMovies().collect {
-                viewState.value = when (it) {
-                    is ApiSuccess -> HomeViewState.TopRatedLoaded(it.data.results)
-                    is ApiException -> HomeViewState.Error
-                    is ApiError -> HomeViewState.Error
-                }
+                topRatedLiveData.postValue(
+                    when (it) {
+                        is ApiSuccess -> HomeViewState.TopRatedLoaded(it.data.results)
+                        is ApiException -> HomeViewState.Error
+                        is ApiError -> HomeViewState.Error
+                    }
+                )
             }
-        }
-    }
 
-    private fun loadTrends() {
-        viewModelScope.launch {
-            viewState.value = HomeViewState.Loading
-            repository.getTrendMovies().collect{
-                viewState.value = when(it) {
-                is ApiSuccess -> HomeViewState.TrendLoaded(it.data.results)
-                is ApiException -> HomeViewState.Error
-                is ApiError -> HomeViewState.Error
-                }
+            repository.getTrendMovies().collect {
+                trendLiveDate.postValue(
+                    when (it) {
+                        is ApiSuccess -> HomeViewState.TrendLoaded(it.data.results)
+                        is ApiException -> HomeViewState.Error
+                        is ApiError -> HomeViewState.Error
+                    }
+                )
             }
         }
     }

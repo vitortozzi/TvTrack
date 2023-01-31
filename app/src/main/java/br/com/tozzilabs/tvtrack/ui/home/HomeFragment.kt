@@ -47,7 +47,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        homeViewModel.viewState.observe(viewLifecycleOwner, Observer(::handleState))
+        homeViewModel.trendLiveDate.observe(viewLifecycleOwner, Observer(::handleState))
+        homeViewModel.topRatedLiveData.observe(viewLifecycleOwner, Observer(::handleState))
     }
 
     private fun handleState(homeViewState: HomeViewState?) {
