@@ -10,7 +10,7 @@ demonstrate some of the Android Architecture Components.
 - **MVVM** as its archiitecture
 - **StateFlow** for UI updates
 - **Glide** for remote image processing
-- **Shimmer** for loadings
+- **Shimmer** and **Lottie** for loadings
 - **Flow** and **Coroutines** for async tasks
 - **Retrofit** for HTTP requests
 - **Hilt** for dependency injection
