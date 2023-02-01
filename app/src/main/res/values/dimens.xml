@@ -19,4 +19,8 @@
     <dimen name="poster_discover_height">180dp</dimen>
     <dimen name="radius_sm">8dp</dimen>
     <dimen name="spacing_inset_xxs">2dp</dimen>
+    <dimen name="detail_animation_width">120dp</dimen>
+    <dimen name="detail_animation_height">120dp</dimen>
+    <dimen name="error_animation_size">240dp</dimen>
+    <dimen name="retry">Retry</dimen>
 </resources>

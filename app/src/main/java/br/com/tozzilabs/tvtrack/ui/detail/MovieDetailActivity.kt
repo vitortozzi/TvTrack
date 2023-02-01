@@ -3,6 +3,7 @@ package br.com.tozzilabs.tvtrack.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -50,12 +51,21 @@ class MovieDetailActivity : AppCompatActivity() {
         when (detailViewState) {
             is DetailViewState.DetailLoaded -> setupContent(detailViewState.details)
             DetailViewState.Error -> Unit //TODO
-            DetailViewState.Loading -> Unit //TODO
+            DetailViewState.Loading -> showLoading()
             null -> Unit
         }
     }
 
+    private fun showLoading() {
+        binding.loadingView.visibility = View.VISIBLE
+        binding.contentDescription.root.visibility = View.GONE
+    }
+
     private fun setupContent(movie: Movie) {
+
+        binding.loadingView.visibility = View.GONE
+        binding.contentDescription.root.visibility = View.VISIBLE
+
         Glide.with(this)
             .load(getImageUrl(movie.backdropPath))
             .into(binding.movieBackdrop)

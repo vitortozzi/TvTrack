@@ -12,8 +12,9 @@ import br.com.tozzilabs.tvtrack.databinding.FragmentHomeBinding
 import br.com.tozzilabs.tvtrack.data.model.Movie
 import br.com.tozzilabs.tvtrack.ui.detail.MovieDetailActivityDirections
 import br.com.tozzilabs.tvtrack.ui.home.adapter.DiscoverMovieAdapter
-import com.google.android.material.snackbar.Snackbar
+
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclers()
         setupObservers()
+        setupListeners()
     }
 
     private fun setupRecyclers() {
@@ -49,7 +51,7 @@ class HomeFragment : Fragment() {
 
     private fun setupObservers() {
         lifecycleScope.launch {
-            homeViewModel.uiState.collect { uiState ->
+            homeViewModel.uiState.collectLatest { uiState ->
                 handleState(uiState)
             }
         }
@@ -57,7 +59,7 @@ class HomeFragment : Fragment() {
 
     private fun handleState(homeViewState: HomeViewState) {
         when(homeViewState) {
-            HomeViewState.Error -> showError("Error while fetching movies...")
+            HomeViewState.Error -> showError()
             HomeViewState.Loading -> showLoading()
             is HomeViewState.DiscoverItemsLoaded -> {
                 showContent()
@@ -67,16 +69,25 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupListeners() {
+        binding.errorView.btnRetry.setOnClickListener {
+            homeViewModel.loadDiscoverMovies()
+        }
+    }
+
     private fun showLoading() {
         binding.shimmerContent.shimmer.apply {
             startShimmer()
             visibility = View.VISIBLE
         }
+        binding.homeContent.root.visibility = View.GONE
+        binding.errorView.root.visibility = View.GONE
     }
 
     private fun showContent() {
-        binding.shimmerContent.shimmer.visibility = View.GONE
         binding.homeContent.root.visibility = View.VISIBLE
+        binding.shimmerContent.shimmer.visibility = View.GONE
+        binding.errorView.root.visibility = View.GONE
     }
 
     private fun redirectToDetails(it: Movie) {
@@ -96,8 +107,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun showError(msg: String) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE).setAction("DISMISS") {
-        }.show()
+    private fun showError() {
+        binding.errorView.root.visibility = View.VISIBLE
+        binding.shimmerContent.shimmer.visibility = View.GONE
+        binding.homeContent.root.visibility = View.GONE
     }
 }

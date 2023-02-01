@@ -41,6 +41,21 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <RelativeLayout
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="@dimen/detail_animation_width"
+            android:layout_height="@dimen/detail_animation_height"
+            android:layout_centerInParent="true"
+            app:lottie_rawRes="@raw/loading_animation"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+    </RelativeLayout>
+
     <include
         android:id="@+id/content_description"
         layout="@layout/content_scrolling" />

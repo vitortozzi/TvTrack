@@ -23,8 +23,9 @@ class HomeViewModel @Inject constructor(
         loadDiscoverMovies()
     }
 
-    private fun loadDiscoverMovies() {
+    fun loadDiscoverMovies() {
         viewModelScope.launch {
+            _uiState.value = HomeViewState.Loading
             discoverMoviesUseCase.invoke().collect {
                 _uiState.value = when(it) {
                     is Resource.Error -> HomeViewState.Error
