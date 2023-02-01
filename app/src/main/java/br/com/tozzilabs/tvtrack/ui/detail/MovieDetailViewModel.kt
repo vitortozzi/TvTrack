@@ -20,10 +20,11 @@ class MovieDetailViewModel @Inject constructor(
 
     fun fetchDetails(id: Long) {
         viewModelScope.launch {
-            val response = repository.getDetails(id)
-            _uiState.value = when (response) {
-                is Resource.Error -> DetailViewState.Error
-                is Resource.Success -> DetailViewState.DetailLoaded(response.getContent())
+            repository.getDetails(id).collect {
+                _uiState.value = when (it) {
+                    is Resource.Error -> DetailViewState.Error
+                    is Resource.Success -> DetailViewState.DetailLoaded(it.getContent())
+                }
             }
         }
     }
