@@ -25,7 +25,7 @@ The only requirement is that you you need to register in order to get an API key
 
 ## Try yourself!
 ### Installing the app
-You can download the debug apk version and install on you own device. Download [here](https://drive.google.com/file/d/1YO0BZIn0BhdLA4Iu4o1DbMWXZQnadXv7/view?usp=share_link)
+You can download the debug apk version and install on you own device. Download [here](https://drive.google.com/drive/folders/1FXPEKPxpxC554U8oIL4FUCKT9aKm9d9J?usp=share_link)
 ### Running through the Android Studio
 Another option is to get a local build of the app. For that you'll need to clone this repo and just run the project.
 **IMPORTANT**: You will need a TMBD api key, After you got registered on their platform, please put a file named apikey.properties on the root folder of this project. Inside this file, you should fill with you key like the examble below:
