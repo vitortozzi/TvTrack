@@ -8,7 +8,7 @@ demonstrate some of the Android Architecture Components.
 ## How the app was built
 - **Kotlin** as its language
 - **MVVM** as its archiitecture
-- **Livedata** for UI updates
+- **StateFlow** for UI updates
 - **Glide** for remote image processing
 - **Shimmer** for loadings
 - **Flow** and **Coroutines** for async tasks
